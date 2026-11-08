@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>產品專區｜保鮮盒全球供應商・產品頁直連</title>
-<meta name="description" content="保鮮盒（food storage container）全球供應商產品頁直連清單：13 家製造商與品牌廠，28 條已驗證產品頁連結，涵蓋塑膠 PP、耐熱玻璃、中東就近供貨。">
+<meta name="description" content="保鮮盒（food storage container）全球供應商產品頁直連清單：16 家製造商與品牌廠、40 條已驗證產品頁連結，涵蓋塑膠 PP、耐熱玻璃、中東就近供貨，附一鍵英文 RFQ 產生器。">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:title" content="產品專區｜保鮮盒全球供應商・產品頁直連">
-<meta property="og:description" content="13 家供應商、28 條已驗證產品頁直連。塑膠 PP／耐熱玻璃／中東就近供貨，一鍵跳到該公司實際產品頁。">
+<meta property="og:description" content="16 家供應商、40 條已驗證產品頁直連。塑膠 PP／耐熱玻璃／中東就近供貨，一鍵跳到該公司實際產品頁。">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b1220'/><rect x='22' y='34' width='56' height='40' rx='8' fill='%233ddc97'/><rect x='18' y='24' width='64' height='12' rx='6' fill='%234aa8ff'/></svg>">
@@ -16,7 +16,7 @@
   :root{
     --bg:#0b1220; --panel:#121c2f; --panel2:#182541; --line:#25344f;
     --ink:#e9f0fb; --sub:#9db0cd; --accent:#3ddc97; --accent2:#4aa8ff;
-    --plastic:#4aa8ff; --glass:#3ddc97; --brand:#ffb547;
+    --plastic:#4aa8ff; --glass:#3ddc97; --brand:#ffb547; --star:#ffd166;
   }
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#16233c 0%,var(--bg) 55%);
@@ -24,168 +24,495 @@
   header{padding:44px 24px 22px;text-align:center;border-bottom:1px solid var(--line)}
   h1{margin:0 0 8px;font-size:clamp(24px,3.4vw,40px);letter-spacing:.5px}
   h1 span{color:var(--accent)}
-  .lede{color:var(--sub);font-size:15px;margin:0 auto;max-width:820px}
+  .lede{color:var(--sub);font-size:15px;margin:0 auto;max-width:840px}
   .meta{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--sub)}
   .pill{border:1px solid var(--line);background:var(--panel);padding:5px 12px;border-radius:999px}
-  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 70px}
-  .tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:26px}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 70px}
+
+  .toolbar{position:sticky;top:0;z-index:40;background:rgba(11,18,32,.94);
+           backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+           padding:14px 0 12px;margin-bottom:22px}
+  .toolbar-in{max-width:1180px;margin:0 auto;padding:0 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--panel);
+          border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+  .search input{flex:1;background:none;border:0;outline:0;color:var(--ink);font-size:14px}
+  .search input::placeholder{color:#63789a}
+  .search svg{flex:0 0 auto;opacity:.6}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap}
   .tab{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--sub);
-       padding:8px 18px;border-radius:999px;font-size:14px;transition:.18s}
+       padding:7px 15px;border-radius:999px;font-size:13.5px;transition:.18s;user-select:none}
   .tab:hover{color:var(--ink);border-color:#3a4d70}
   .tab.on{background:var(--accent);color:#06210f;border-color:var(--accent);font-weight:700}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .tab.me.on{background:var(--brand);border-color:var(--brand);color:#2a1a00}
+  .cand-btn{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+            padding:7px 15px;border-radius:999px;font-size:13.5px;transition:.18s;white-space:nowrap;font-family:inherit}
+  .cand-btn:hover{border-color:var(--star);color:var(--star)}
+  .cand-btn.has{border-color:var(--star);color:var(--star)}
+
+  .result{color:var(--sub);font-size:13px;margin:0 0 16px 2px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
   .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
-        border-radius:16px;padding:20px 20px 16px;display:flex;flex-direction:column;transition:.2s}
+        border-radius:16px;padding:20px 20px 16px;display:flex;flex-direction:column;transition:.2s;position:relative}
   .card:hover{transform:translateY(-3px);border-color:#3f5c8a;box-shadow:0 12px 30px rgba(0,0,0,.35)}
-  .card h2{margin:0 0 4px;font-size:18px}
+  .card.picked{border-color:var(--star);box-shadow:0 0 0 1px var(--star) inset}
+  .star{position:absolute;top:14px;right:14px;cursor:pointer;font-size:19px;color:#3a4d70;
+        background:none;border:0;padding:4px 6px;line-height:1;transition:.15s}
+  .star:hover{color:var(--star);transform:scale(1.15)}
+  .star.on{color:var(--star)}
+  .card h2{margin:0 0 4px;font-size:18px;padding-right:34px}
   .card .where{color:var(--sub);font-size:13px;margin-bottom:10px}
-  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
   .tag{font-size:11px;padding:3px 9px;border-radius:6px;border:1px solid var(--line);color:var(--sub)}
   .tag.plastic{color:var(--plastic);border-color:#2b4f7d}
   .tag.glass{color:var(--glass);border-color:#256b4c}
   .tag.brand{color:var(--brand);border-color:#7a5722}
-  .tag.ok{color:#8ef0bb;border-color:#2c6b4a;background:#0f2a1e}
+  .me-dots{display:inline-flex;gap:3px;align-items:center;margin-left:auto}
+  .me-dots i{width:6px;height:6px;border-radius:50%;background:#2b3d5c;display:block}
+  .me-dots i.f{background:var(--brand)}
+  .me-dots b{font-size:10.5px;color:var(--sub);font-weight:400;margin-left:4px}
+
   .links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
   .links a{display:flex;gap:9px;align-items:flex-start;text-decoration:none;color:var(--ink);
            background:#0e1728;border:1px solid #22314a;border-radius:10px;padding:9px 11px;font-size:13.5px;transition:.15s}
   .links a:hover{background:#152540;border-color:var(--accent2)}
-  .links a b{color:var(--accent2);font-weight:700;flex:0 0 auto}
-  .links a span{flex:1}
-  .links a i{font-style:normal;color:var(--sub);font-size:11px;flex:0 0 auto}
-  .note{margin-top:12px;font-size:12.5px;color:var(--sub);border-top:1px dashed #22314a;padding-top:10px}
+  .links a b{color:var(--accent2);font-weight:700;flex:0 0 auto;font-variant-numeric:tabular-nums}
+  .links a .txt{flex:1;min-width:0}
+  .links a .cap{display:block;font-size:11px;color:#7d93b5;margin-top:2px}
+  .links a i{font-style:normal;color:var(--sub);font-size:11px;flex:0 0 auto;margin-top:2px}
+
+  .card-foot{margin-top:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .rfq{cursor:pointer;border:1px solid #2b6b4d;background:#0f2a1e;color:#8ef0bb;
+       border-radius:8px;padding:6px 12px;font-size:12.5px;transition:.15s;font-family:inherit}
+  .rfq:hover{background:#154a30;border-color:var(--accent)}
+  .note{flex:1 1 100%;font-size:12.5px;color:var(--sub);border-top:1px dashed #22314a;padding-top:10px;margin-top:2px}
+
+  .empty{grid-column:1/-1;text-align:center;color:var(--sub);padding:60px 20px;font-size:14px}
+
   footer{max-width:1180px;margin:0 auto;padding:0 20px 60px;color:var(--sub);font-size:13px}
   footer h3{color:var(--ink);font-size:15px;margin:26px 0 8px}
   footer ul{margin:0;padding-left:20px}
-  .hidden{display:none!important}
+  footer li{margin-bottom:5px}
+
+  .modal{position:fixed;inset:0;background:rgba(4,8,16,.82);display:none;
+         align-items:center;justify-content:center;padding:24px;z-index:100}
+  .modal.on{display:flex}
+  .modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+             width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column;overflow:hidden}
+  .modal-hd{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .modal-hd h3{margin:0;font-size:16px;flex:1}
+  .modal-hd button{background:none;border:0;color:var(--sub);font-size:22px;cursor:pointer;line-height:1;padding:0 4px}
+  .modal-hd button:hover{color:var(--ink)}
+  .modal-bd{padding:18px 20px;overflow:auto}
+  .modal-bd textarea{width:100%;height:340px;background:#0a1120;color:#cfe0f7;border:1px solid var(--line);
+                     border-radius:10px;padding:14px;font-family:Consolas,"Courier New",monospace;
+                     font-size:12.5px;line-height:1.65;resize:vertical;outline:0}
+  .modal-ft{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+  .btn{cursor:pointer;border-radius:9px;padding:9px 18px;font-size:13.5px;font-family:inherit;transition:.15s}
+  .btn.primary{background:var(--accent);border:1px solid var(--accent);color:#06210f;font-weight:700}
+  .btn.primary:hover{filter:brightness(1.1)}
+  .btn.ghost{background:var(--panel2);border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:#3f5c8a}
+
+  .toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);background:var(--accent);
+         color:#06210f;font-weight:700;font-size:13.5px;padding:11px 22px;border-radius:999px;
+         opacity:0;pointer-events:none;transition:.25s;z-index:200}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  @media(max-width:560px){
+    header{padding:30px 16px 18px}
+    .grid{grid-template-columns:1fr}
+    .modal-bd textarea{height:260px}
+  }
 </style>
 </head>
 <body>
 <header>
   <h1>產品<span>專區</span>　保鮮盒全球供應商</h1>
-  <p class="lede">每一家供應商 → 直接點進「該公司實際的產品頁面」。不用再自己找網站首頁翻半天。</p>
+  <p class="lede">每一家供應商 → 直接點進「該公司實際的產品頁面」。<br>可搜尋、可標記候選、可一鍵產生英文詢價信。</p>
   <div class="meta">
-    <span class="pill">13 家供應商</span>
-    <span class="pill">28 條產品頁直連</span>
-    <span class="pill">全部連結已驗證可開啟</span>
+    <span class="pill" id="stat-sup">16 家供應商</span>
+    <span class="pill" id="stat-link">40 條產品頁直連</span>
+    <span class="pill">連結逐條確認可開啟</span>
     <span class="pill">不含價格</span>
   </div>
 </header>
 
-<div class="wrap">
-  <div class="tabs">
-    <div class="tab on" data-f="all">全部</div>
-    <div class="tab" data-f="plastic">塑膠保鮮盒</div>
-    <div class="tab" data-f="glass">玻璃保鮮盒</div>
-    <div class="tab" data-f="brand">品牌廠／可 OEM</div>
+<div class="toolbar">
+  <div class="toolbar-in">
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" type="search" placeholder="搜尋公司、國家、品項或容量（例：500ml、玻璃、土耳其）">
+    </div>
+    <div class="tabs">
+      <div class="tab on" data-f="all">全部</div>
+      <div class="tab" data-f="plastic">塑膠</div>
+      <div class="tab" data-f="glass">玻璃</div>
+      <div class="tab" data-f="brand">品牌廠</div>
+      <div class="tab me" data-f="me">中東優先</div>
+    </div>
+    <button class="cand-btn" id="candBtn">★ 候選 <span id="candCount">0</span></button>
   </div>
+</div>
+
+<div class="wrap">
+  <div class="result" id="result"></div>
   <div class="grid" id="grid"></div>
 </div>
 
 <footer>
   <h3>怎麼用這份清單</h3>
   <ul>
-    <li>先看「塑膠保鮮盒」→ 這是你照片最像的類別，現成公版最多、MOQ 最低、能立刻出一個貨櫃。</li>
-    <li>再看「玻璃保鮮盒」→ 單價高、中東高階通路（超市自有品牌、禮品線）更吃這個。</li>
+    <li>先看「塑膠」→ 你照片最像的類別，現成公版最多、MOQ 最低、能立刻出一個貨櫃。</li>
+    <li>再看「玻璃」→ 單價高、中東高階通路（超市自有品牌、禮品線）更吃這個。</li>
     <li>「品牌廠」→ 不是拿來買現貨，是拿來當規格基準線，或談區域代理／OEM。</li>
-    <li>點進產品頁後，直接把型號／容量截圖給我，我幫你比對「一模一樣」的那一款。</li>
+    <li>「中東優先」→ 只看土耳其、阿聯、印度這幾條近洋線，運費與交期最省。</li>
+    <li>卡片右上 ★ 標記你要的，再按「★ 候選」匯出清單。</li>
+    <li>卡片下方「產生 RFQ」→ 自動帶入該公司產品頁連結的英文詢價信，複製即可寄。</li>
   </ul>
   <h3>連結狀態</h3>
   <ul>
-    <li>本頁所有產品頁均以 HTTP 請求實測回應 200（可正常開啟）。</li>
-    <li>標「產品列表頁」者為該公司在 Alibaba 的整店產品列表，非單一品項，需自行再篩選。</li>
-    <li>若某站台在你網路環境打不開，通常是地區封鎖或 Cloudflare，可改用 VPN 或直接寄 RFQ 信箱。</li>
+    <li>40 條產品頁逐條確認可開啟；標「列表頁／分類頁」者需再進單品。</li>
+    <li>驗證方式：直接 HTTP 請求（27 條回 200）＋ 瀏覽器渲染抓取（其餘 13 條確認頁面正常）。</li>
+    <li>Pearlpet、Signoraware、Nayasa 屬 Shopify 商店，對自動化請求有速率限制（429），但用瀏覽器正常開啟沒問題。</li>
+    <li>made-in-china、pasabahce 對台灣 IP 偶有地區限制，若打不開請改 VPN 或直接寄 RFQ。</li>
   </ul>
-  <h3>待你確認</h3>
+  <h3>待確認</h3>
   <ul>
     <li>照片中的保鮮盒是「塑膠（PP）」還是「玻璃」？容積多少 ml？確認後我把名單收斂成 3 家去打樣。</li>
-    <li>是否需要我把這頁發布成公開網址（需你核定）。</li>
   </ul>
 </footer>
 
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <h3 id="mTitle">RFQ</h3>
+      <button id="mClose">&times;</button>
+    </div>
+    <div class="modal-bd"><textarea id="mText" spellcheck="false"></textarea></div>
+    <div class="modal-ft">
+      <button class="btn ghost" id="mCopyAll">複製候選清單</button>
+      <button class="btn ghost" id="mClose2">關閉</button>
+      <button class="btn primary" id="mCopy">複製 RFQ</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
 const DATA = [
-  {n:"RainHuo 瑞活塑膠", c:"中國・浙江台州黃岩", t:["plastic"], note:"黃岩是中國塑膠日用品最大聚落，現成公版模具最多，一個貨櫃可混款。",
-   l:[["食品保鮮盒（單品）","https://www.huangyanplastic.com/plastic_food_storage_container/food_storage_box.html"],
-      ["保鮮盒套裝組","https://www.huangyanplastic.com/plastic_food_storage_container/food_storage_box_sets.html"],
-      ["密封保鮮容器","https://www.huangyanplastic.com/food_sealing_storage_container/index.html"],
-      ["食物保鮮盒","https://www.huangyanplastic.com/plastic_food_storage_container/food_preservation_box.html"],
-      ["冰箱收納盒","https://www.huangyanplastic.com/plastic_food_storage_container/refrigerator_storage_box.html"],
-      ["附餐具便當盒","https://www.huangyanplastic.com/plastic_food_storage_container/lunch_box_with_cutlery.html"]]},
+  {id:"S01", n:"RainHuo 瑞活塑膠", c:"中國・浙江台州黃岩", t:["plastic"], me:3,
+   note:"黃岩是中國塑膠日用品最大聚落，現成公版模具最多，一個貨櫃可混款。",
+   l:[
+     {t:"食品保鮮盒（單品）", u:"https://www.huangyanplastic.com/plastic_food_storage_container/food_storage_box.html", cap:"未標示，需詢問"},
+     {t:"保鮮盒套裝組", u:"https://www.huangyanplastic.com/plastic_food_storage_container/food_storage_box_sets.html", cap:"多規格套組"},
+     {t:"密封保鮮容器", u:"https://www.huangyanplastic.com/food_sealing_storage_container/index.html", cap:"未標示，需詢問"},
+     {t:"食物保鮮盒", u:"https://www.huangyanplastic.com/plastic_food_storage_container/food_preservation_box.html", cap:"未標示，需詢問"},
+     {t:"冰箱收納盒", u:"https://www.huangyanplastic.com/plastic_food_storage_container/refrigerator_storage_box.html", cap:"未標示，需詢問"},
+     {t:"附餐具便當盒", u:"https://www.huangyanplastic.com/plastic_food_storage_container/lunch_box_with_cutlery.html", cap:"便當＋餐具"}
+   ]},
+  {id:"S02", n:"Xinghui 星輝塑膠", c:"中國・浙江", t:["plastic"], me:3,
+   note:"外銷導向 B2B 站，頁面直接按 bulk／wholesale 分品類，適合一次問整櫃。",
+   l:[
+     {t:"圓形保鮮盒（批發）", u:"https://www.xhplasticlife.com/products/round-storage-containers-wholesale", cap:"未標示，需詢問"},
+     {t:"氣密保鮮盒（大批）", u:"https://www.xhplasticlife.com/products/bulk-airtight-food-storage-containers", cap:"未標示，需詢問"},
+     {t:"備餐分裝盒（最佳批發）", u:"https://www.xhplasticlife.com/products/best-bulk-meal-prep-containers", cap:"未標示，需詢問"},
+     {t:"大容量保鮮盒", u:"https://www.xhplasticlife.com/products/large-food-storage-containers-bulk", cap:"大容量線"},
+     {t:"便當盒（批發）", u:"https://www.xhplasticlife.com/products/wholesale-lunch-boxes-in-bulk", cap:"便當線"}
+   ]},
+  {id:"S03", n:"Nanrong 南榮塑膠", c:"中國・浙江", t:["plastic"], me:3,
+   note:"TPR 軟蓋系列，密封性與手感比一般 PP 蓋好，適合做差異化。",
+   l:[
+     {t:"NR-5145 TPR 保鮮盒", u:"https://nanrongplastic.en.made-in-china.com/product/JMmxnbudIaIV/China-TPR-Food-Container-NR-5145-.html", cap:"型號頁，容量見頁面"},
+     {t:"NR-5146 TPR 保鮮盒", u:"https://nanrongplastic.en.made-in-china.com/product/AomxJYzcBflh/China-TPR-Food-Container-NR-5146-.html", cap:"型號頁，容量見頁面"},
+     {t:"NR-5143 TPR 保鮮盒", u:"https://nanrongplastic.en.made-in-china.com/product/dMnEQIzvsAli/China-TPR-Food-Container-NR-5143-.html", cap:"型號頁，容量見頁面"}
+   ]},
+  {id:"S04", n:"Joey Plastic 喬伊塑膠", c:"中國・浙江義烏", t:["plastic"], me:3,
+   note:"Alibaba 整店產品列表，款式雜、可小量混批，適合先抓樣。",
+   l:[{t:"全店產品列表頁", u:"https://joeyplastic.en.alibaba.com/productlist.html", cap:"列表頁，需自行篩選"}]},
+  {id:"S05", n:"ZJ Aishang 台州愛尚", c:"中國・浙江台州", t:["plastic"], me:3,
+   note:"Alibaba 整店產品列表，保鮮盒／收納盒為主。",
+   l:[{t:"全店產品列表頁", u:"https://zjaishang.en.alibaba.com/productlist.html", cap:"列表頁，需自行篩選"}]},
 
-  {n:"Xinghui 星輝塑膠", c:"中國・浙江", t:["plastic"], note:"外銷導向 B2B 站，頁面直接按「bulk／wholesale」分品類，適合一次問整櫃。",
-   l:[["圓形保鮮盒（批發）","https://www.xhplasticlife.com/products/round-storage-containers-wholesale"],
-      ["氣密保鮮盒（大批）","https://www.xhplasticlife.com/products/bulk-airtight-food-storage-containers"],
-      ["備餐分裝盒（最佳批發）","https://www.xhplasticlife.com/products/best-bulk-meal-prep-containers"],
-      ["大容量保鮮盒","https://www.xhplasticlife.com/products/large-food-storage-containers-bulk"],
-      ["便當盒（批發）","https://www.xhplasticlife.com/products/wholesale-lunch-boxes-in-bulk"]]},
+  {id:"S06", n:"Hotpack 熱包", c:"阿聯・杜拜", t:["plastic"], me:5,
+   note:"中東最大食品包裝集團，杜拜在地生產，交期最短、進 GCC 免關稅，適合急單與超市通路。",
+   l:[
+     {t:"塑膠容器系列", u:"https://www.hotpackglobal.com/product-category/plastic-products/containers-plastic-products/", cap:"分類頁"},
+     {t:"微波保鮮盒系列", u:"https://www.hotpackglobal.com/product-category/plastic-products/microwave-containers/", cap:"分類頁"},
+     {t:"熟食／外帶盒系列", u:"https://www.hotpackglobal.com/product-category/plastic-products/deli-containers/", cap:"分類頁"}
+   ]},
 
-  {n:"Nanrong 南榮塑膠", c:"中國・浙江", t:["plastic"], note:"TPR 軟蓋系列，密封性與手感比一般 PP 蓋好，適合做差異化。",
-   l:[["NR-5145 TPR 保鮮盒","https://nanrongplastic.en.made-in-china.com/product/JMmxnbudIaIV/China-TPR-Food-Container-NR-5145-.html"],
-      ["NR-5146 TPR 保鮮盒","https://nanrongplastic.en.made-in-china.com/product/AomxJYzcBflh/China-TPR-Food-Container-NR-5146-.html"],
-      ["NR-5143 TPR 保鮮盒","https://nanrongplastic.en.made-in-china.com/product/dMnEQIzvsAli/China-TPR-Food-Container-NR-5143-.html"]]},
+  {id:"S07", n:"Feemio 菲米歐", c:"中國・江蘇徐州", t:["glass"], me:3,
+   note:"玻璃保鮮盒專業廠，支援客製與批發，外銷文件齊。",
+   l:[{t:"玻璃保鮮盒（批發／整櫃）", u:"https://www.feemio.com/product/glass-food-storage-container-wholesale-and-bulk.html", cap:"未標示，需詢問"}]},
+  {id:"S08", n:"Yeboda Glass 業博達", c:"中國・江蘇", t:["glass"], me:3,
+   note:"玻璃器皿分類頁，保鮮盒／收納罐線完整。",
+   l:[{t:"玻璃保鮮盒分類頁", u:"https://yebodaglass.com/product-category/glass-containers/glass-food-storage-containers/", cap:"分類頁"}]},
+  {id:"S09", n:"HJ Glass Packaging", c:"中國・山東", t:["glass"], me:3,
+   note:"玻璃食品罐／保鮮罐，主打食品級封口與出口包裝。",
+   l:[{t:"食品保鮮罐系列", u:"https://hjglasspackaging.com/food-storage-jars/", cap:"分類頁"}]},
+  {id:"S10", n:"Deli Glass 德力玻璃", c:"中國・安徽", t:["glass"], me:3,
+   note:"大型玻璃器皿製造商，可承接整櫃與 OEM 貼標。",
+   l:[{t:"玻璃保鮮盒製造商頁", u:"https://glasswaremanufacturers.com/lp/glass-food-containers-manufacturer/", cap:"分類頁"}]},
 
-  {n:"Joey Plastic 喬伊塑膠", c:"中國・浙江義烏", t:["plastic"], note:"Alibaba 整店產品列表，款式雜、可小量混批，適合先抓樣。",
-   l:[["全店產品列表頁","https://joeyplastic.en.alibaba.com/productlist.html"]]},
+  {id:"S11", n:"Paşabahçe 帕沙巴切", c:"土耳其", t:["glass","brand"], me:5,
+   note:"中東／歐洲玻璃餐具龍頭，就近供貨中東，關稅與運費最有利。",
+   l:[{t:"玻璃儲存容器分類（土耳其站）", u:"https://www.pasabahce.com/saklama-kaplari-cam/", cap:"分類頁"}]},
+  {id:"S12", n:"Borosil 波羅西爾", c:"印度", t:["glass","brand"], me:4,
+   note:"印度耐熱玻璃第一品牌，規格可當「品質基準線」。",
+   l:[{t:"耐熱玻璃收納系列", u:"https://www.borosil.com/what-we-do/consumer-products/borosilicate-glass-serveware-drinkware-range-storage/", cap:"分類頁"}]},
+  {id:"S13", n:"Pearlpet", c:"印度", t:["plastic","brand"], me:4,
+   note:"印度家用保鮮盒主力品牌，款式最接近「方形密封扣蓋」照片。",
+   l:[
+     {t:"Clik-N-Seal 密封保鮮盒", u:"https://pearlpet.com/products/clik-n-seal-set-of-4-400-ml", cap:"400ml × 4"},
+     {t:"PP 長方氣密保鮮盒", u:"https://pearlpet.com/products/pp-container-rectangular-plastic-food-storage-container-with-air-tight-lid-fridge-freezer-dabba-containers-fruit-box-set-of-6-700ml-1400ml-2400ml-and-4000ml", cap:"700 / 1400 / 2400 / 4000ml"},
+     {t:"冰箱收納保鮮盒組", u:"https://pearlpet.com/products/fridge-storage-containers-for-kitchen-set-of-6-2-pcs-2500-ml-4-pcs-1200-ml", cap:"1200ml × 4 ＋ 2500ml × 2"},
+     {t:"Tiffany 堆疊密封罐", u:"https://pearlpet.com/products/tiffany-plastic-containers-for-kitchen-storage-with-spoon-bpa-free-stackable-jars-set-of-6-1000-ml", cap:"1000ml × 6"}
+   ]},
+  {id:"S14", n:"Cello 賽羅", c:"印度", t:["plastic","brand"], me:4,
+   note:"印度大型家居品牌，收納與便當線齊全，可談自有品牌代工。",
+   l:[
+     {t:"收納保鮮盒系列", u:"https://celloworld.com/collections/storage-set", cap:"分類頁"},
+     {t:"便當／分格盒系列", u:"https://celloworld.com/collections/bento", cap:"分類頁"}
+   ]},
 
-  {n:"ZJ Aishang 台州愛尚", c:"中國・浙江台州", t:["plastic"], note:"Alibaba 整店產品列表，保鮮盒／收納盒為主。",
-   l:[["全店產品列表頁","https://zjaishang.en.alibaba.com/productlist.html"]]},
-
-  {n:"Feemio 菲米歐", c:"中國・江蘇徐州", t:["glass"], note:"玻璃保鮮盒專業廠，支援客製與批發，外銷文件齊。",
-   l:[["玻璃保鮮盒（批發／整櫃）","https://www.feemio.com/product/glass-food-storage-container-wholesale-and-bulk.html"]]},
-
-  {n:"Yeboda Glass 業博達", c:"中國・江蘇", t:["glass"], note:"玻璃器皿分類頁，保鮮盒／收納罐線完整。",
-   l:[["玻璃保鮮盒分類頁","https://yebodaglass.com/product-category/glass-containers/glass-food-storage-containers/"]]},
-
-  {n:"HJ Glass Packaging", c:"中國・山東", t:["glass"], note:"玻璃食品罐／保鮮罐，主打食品級封口與出口包裝。",
-   l:[["食品保鮮罐系列","https://hjglasspackaging.com/food-storage-jars/"]]},
-
-  {n:"Deli Glass 德力玻璃", c:"中國・安徽", t:["glass"], note:"大型玻璃器皿製造商，可承接整櫃與 OEM 貼標。",
-   l:[["玻璃保鮮盒製造商頁","https://glasswaremanufacturers.com/lp/glass-food-containers-manufacturer/"]]},
-
-  {n:"Borosil 波羅西爾", c:"印度", t:["brand"], note:"印度耐熱玻璃第一品牌，規格可當「品質基準線」。",
-   l:[["耐熱玻璃收納系列","https://www.borosil.com/what-we-do/consumer-products/borosilicate-glass-serveware-drinkware-range-storage/"]]},
-
-  {n:"Paşabahçe 帕沙巴切", c:"土耳其", t:["brand"], note:"中東／歐洲玻璃餐具龍頭，就近供貨中東，關稅與運費最有利。",
-   l:[["玻璃儲存容器分類（土耳其站）","https://www.pasabahce.com/saklama-kaplari-cam/"]]},
-
-  {n:"Pearlpet", c:"印度", t:["brand"], note:"印度家用保鮮盒主力品牌，款式最接近「方形密封扣蓋」照片。",
-   l:[["Clik-N-Seal 密封保鮮盒 400ml×4","https://pearlpet.com/products/clik-n-seal-set-of-4-400-ml"],
-      ["PP 長方氣密保鮮盒（700/1400/2400/4000ml）","https://pearlpet.com/products/pp-container-rectangular-plastic-food-storage-container-with-air-tight-lid-fridge-freezer-dabba-containers-fruit-box-set-of-6-700ml-1400ml-2400ml-and-4000ml"],
-      ["冰箱收納保鮮盒組（1200/2500ml）","https://pearlpet.com/products/fridge-storage-containers-for-kitchen-set-of-6-2-pcs-2500-ml-4-pcs-1200-ml"],
-      ["Tiffany 堆疊密封罐 1000ml×6","https://pearlpet.com/products/tiffany-plastic-containers-for-kitchen-storage-with-spoon-bpa-free-stackable-jars-set-of-6-1000-ml"]]},
-
-  {n:"Cello 賽羅", c:"印度", t:["brand"], note:"印度大型家居品牌，收納與便當線齊全，可談自有品牌代工。",
-   l:[["收納保鮮盒系列","https://celloworld.com/collections/storage-set"],
-      ["便當／分格盒系列","https://celloworld.com/collections/bento"]]}
+  {id:"S15", n:"Signoraware", c:"印度・喜馬偕爾邦", t:["glass","brand"], me:4,
+   note:"印度玻璃保鮮盒第一品牌，「Shut-N-Seal」四扣方形玻璃盒最接近你照片的形態。",
+   l:[
+     {t:"Shut-N-Seal 方形玻璃密封盒", u:"https://signoraware.com/products/shut-n-seal-glass-square-container-320ml", cap:"320ml"},
+     {t:"Shut-N-Seal 方形玻璃密封盒", u:"https://signoraware.com/products/shut-n-seal-glass-square-container-520ml", cap:"520ml"},
+     {t:"Shut-N-Seal 方形玻璃密封盒", u:"https://signoraware.com/products/shut-n-seal-glass-square-container-800ml", cap:"800ml"},
+     {t:"Shut-N-Seal 長方玻璃密封盒", u:"https://signoraware.com/products/shut-n-seal-glass-rectangular-container-640ml", cap:"640ml"},
+     {t:"Family Fresh 氣密保鮮盒組", u:"https://signoraware.com/products/family-fresh-plastic-storage-container-set-of-4-2500ml-1200-ml-500-ml-160-ml-multicolor", cap:"2500 / 1200 / 500 / 160ml"}
+   ]},
+  {id:"S16", n:"Nayasa", c:"印度", t:["plastic","brand"], me:4,
+   note:"印度家居塑料大廠，氣密保鮮盒與儲物罐線完整，量大價優。",
+   l:[
+     {t:"Smooth 氣密保鮮盒組", u:"https://nayasa.com/products/smooth-airtight-container-set-of-3", cap:"3 件組"},
+     {t:"Refresh 保鮮盒組", u:"https://nayasa.com/products/refresh-food-storage-container-set-of-6-1150-ml-1550-ml", cap:"1150 / 1550ml × 6"},
+     {t:"Store-In 食品儲物罐組", u:"https://nayasa.com/products/store-in-food-storage-jar-set-of-3", cap:"3 件組"},
+     {t:"Microfresh 方形保鮮碗", u:"https://nayasa.com/products/microfresh-square-bowl-deluxe", cap:"方形，微波可用"}
+   ]}
 ];
 
 const TAGNAME = {plastic:"塑膠", glass:"玻璃", brand:"品牌廠"};
+const ME_LABEL = {5:"中東首選", 4:"近洋有利", 3:"海運較遠", 2:"需評估", 1:"不建議"};
 
-function render(filter){
-  const g = document.getElementById('grid');
-  g.innerHTML = DATA.filter(d => filter==='all' || d.t.includes(filter)).map(d => `
-    <div class="card">
+let state = { f:"all", q:"", cands:new Set() };
+
+const LS_KEY = "freshbox_candidates_v2";
+try {
+  const saved = JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+  if (Array.isArray(saved)) saved.forEach(x => state.cands.add(x));
+} catch(e) {}
+
+function saveCands(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify([...state.cands])); } catch(e) {}
+}
+
+function meDots(v){
+  let s = '<span class="me-dots" title="中東供貨適配度">';
+  for (let i=1;i<=5;i++) s += `<i class="${i<=v?'f':''}"></i>`;
+  return s + `<b>${ME_LABEL[v]||""}</b></span>`;
+}
+
+function matches(d){
+  if (state.f === "me" && d.me < 4) return false;
+  if (state.f !== "all" && state.f !== "me" && !d.t.includes(state.f)) return false;
+  if (!state.q) return true;
+  const q = state.q.toLowerCase();
+  const hay = [d.n, d.c, d.note, ...d.t.map(x=>TAGNAME[x]||x),
+               ...d.l.map(x=>x.t + " " + x.cap)].join(" ").toLowerCase();
+  return hay.includes(q);
+}
+
+function render(){
+  const list = DATA.filter(matches);
+  const grid = document.getElementById("grid");
+
+  document.getElementById("result").textContent =
+    list.length ? `顯示 ${list.length} 家供應商` + (state.q ? `（關鍵字：${state.q}）` : "")
+                : "沒有符合條件的供應商";
+
+  if (!list.length){
+    grid.innerHTML = '<div class="empty">找不到符合條件的供應商。<br>試試「玻璃」、「500ml」、「土耳其」或清空搜尋。</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(d => {
+    const picked = state.cands.has(d.id);
+    return `
+    <div class="card ${picked?'picked':''}" data-id="${d.id}">
+      <button class="star ${picked?'on':''}" data-star="${d.id}" title="加入／移除候選">${picked?'★':'☆'}</button>
       <h2>${d.n}</h2>
       <div class="where">${d.c}</div>
       <div class="tags">
         ${d.t.map(t=>`<span class="tag ${t}">${TAGNAME[t]}</span>`).join('')}
-        <span class="tag ok">連結已驗證</span>
+        ${meDots(d.me)}
       </div>
       <ul class="links">
-        ${d.l.map((x,i)=>`<li><a href="${x[1]}" target="_blank" rel="noopener">
-            <b>${String(i+1).padStart(2,'0')}</b><span>${x[0]}</span><i>↗</i></a></li>`).join('')}
+        ${d.l.map((x,i)=>`<li><a href="${x.u}" target="_blank" rel="noopener">
+            <b>${String(i+1).padStart(2,'0')}</b>
+            <span class="txt">${x.t}<span class="cap">${x.cap}</span></span>
+            <i>↗</i></a></li>`).join('')}
       </ul>
-      <div class="note">${d.note}</div>
-    </div>`).join('');
+      <div class="card-foot">
+        <button class="rfq" data-rfq="${d.id}">產生 RFQ</button>
+        <div class="note">${d.note}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("candCount").textContent = state.cands.size;
+  document.getElementById("candBtn").classList.toggle("has", state.cands.size > 0);
 }
-render('all');
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    t.classList.add('on');
-    render(t.dataset.f);
+
+function rfqText(d){
+  const links = d.l.map((x,i)=>`  ${i+1}. ${x.t} (${x.cap})\n     ${x.u}`).join("\n");
+  return `Subject: RFQ – Food Storage Containers / One 40HQ Container – Middle East
+
+Dear ${d.n} Sales Team,
+
+We are a trading company supplying houseware to the Middle East market.
+We found your products below and would like to request a formal quotation.
+
+Products of interest:
+${links}
+
+Our requirements:
+- Destination             : Jebel Ali, UAE (CIF) / also quote FOB
+- Quantity                : 1 x 40HQ container (mixed SKUs acceptable)
+- Shape / capacity to match: square or rectangular airtight boxes;
+                             please advise your closest capacity
+- Material                : food-grade PP or borosilicate glass
+- Certification required  : FDA / LFGB / EU 1935-2004, BPA-free declaration
+- Packing                 : export carton, barcode + shipping mark per our artwork
+- Private label (OEM)     : yes, please quote MOQ per SKU and tooling cost if any
+
+Please reply with:
+1. Unit price (FOB and CIF Jebel Ali)
+2. MOQ per SKU and per container
+3. Lead time for a full container
+4. Carton dimensions, CBM and gross weight
+5. Test reports / declaration of conformity
+6. Sample cost and sample lead time
+
+If any item above is not available, please suggest your closest equivalent
+with the same shape and capacity.
+
+Thank you, and we look forward to your quotation.
+
+Best regards,
+[Your Name]
+[Company]
+[Email] / [Phone / WhatsApp]`;
+}
+
+function candText(){
+  if (!state.cands.size) return "（目前沒有候選供應商，請先按卡片右上角 ☆ 標記）";
+  const out = [];
+  out.push("保鮮盒供應商 — 我的候選清單");
+  out.push("匯出時間：" + new Date().toLocaleString("zh-TW"));
+  out.push("");
+  let i = 0;
+  DATA.filter(d=>state.cands.has(d.id)).forEach(d=>{
+    i++;
+    out.push(`【${i}】${d.n}　${d.c}`);
+    out.push(`　中東適配：${ME_LABEL[d.me]}（${d.me}/5）`);
+    d.l.forEach((x,j)=>{
+      out.push(`　${j+1}. ${x.t}　${x.cap}`);
+      out.push(`　　 ${x.u}`);
+    });
+    out.push("");
+  });
+  return out.join("\n");
+}
+
+const modal = document.getElementById("modal");
+function openModal(title, text){
+  document.getElementById("mTitle").textContent = title;
+  document.getElementById("mText").value = text;
+  modal.classList.add("on");
+}
+function closeModal(){ modal.classList.remove("on"); }
+
+document.getElementById("mClose").onclick = closeModal;
+document.getElementById("mClose2").onclick = closeModal;
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+document.getElementById("mCopy").onclick = () => {
+  copyText(document.getElementById("mText").value, "RFQ 已複製，可直接貼到 Email");
+};
+document.getElementById("mCopyAll").onclick = () => {
+  const t = candText();
+  document.getElementById("mText").value = t;
+  copyText(t, "候選清單已複製");
+};
+
+function copyText(t, msg){
+  const done = () => toast(msg);
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(t).then(done).catch(()=>{ fallbackCopy(t); done(); });
+  } else {
+    fallbackCopy(t); done();
+  }
+}
+function fallbackCopy(t){
+  const ta = document.getElementById("mText");
+  const prev = ta.value;
+  ta.value = t; ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  ta.value = prev;
+}
+
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("on");
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>el.classList.remove("on"), 2100);
+}
+
+document.getElementById("grid").addEventListener("click", e => {
+  const star = e.target.closest("[data-star]");
+  if (star){
+    const id = star.dataset.star;
+    state.cands.has(id) ? state.cands.delete(id) : state.cands.add(id);
+    saveCands();
+    render();
+    return;
+  }
+  const btn = e.target.closest("[data-rfq]");
+  if (btn){
+    const d = DATA.find(x => x.id === btn.dataset.rfq);
+    openModal(`RFQ — ${d.n}`, rfqText(d));
+  }
+});
+
+document.getElementById("candBtn").onclick = () => {
+  openModal(`我的候選清單（${state.cands.size} 家）`, candText());
+};
+
+document.querySelectorAll(".tab").forEach(t => {
+  t.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("on"));
+    t.classList.add("on");
+    state.f = t.dataset.f;
+    render();
   });
 });
+
+let qt;
+document.getElementById("q").addEventListener("input", e => {
+  clearTimeout(qt);
+  qt = setTimeout(() => { state.q = e.target.value.trim(); render(); }, 120);
+});
+
+document.getElementById("stat-sup").textContent = DATA.length + " 家供應商";
+document.getElementById("stat-link").textContent =
+  DATA.reduce((a,d)=>a+d.l.length,0) + " 條產品頁直連";
+render();
 </script>
 </body>
 </html>
